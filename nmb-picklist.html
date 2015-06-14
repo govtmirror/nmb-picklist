@@ -26,17 +26,11 @@ Example:
       box-sizing: border-box;
     }
 
-    .author img {
-      float: left;
-      margin-right: 5px;
-      max-height: 100px;
-      max-width: 100px;
-    }
   </style>
 
   <template>
     <label>Carrier:</label>
-    <paper-icon-button icon="{{nmbicon}}" on-tap="_togglemenu"></paper-icon-button><span>{{_itemdisplay}}</span>
+    <paper-icon-button icon="{{nmbicon}}" on-tap="_togglemenu"></paper-icon-button>
     <iron-collapse id="itemmenu">
       <iron-selector 
           selected="{{_itemselection}}">
@@ -81,16 +75,20 @@ Example:
       /**
       *  The readonly attribute which is the object selected
       */
-      nmbSelecteditem: Object,
+      nmbSelecteditem: {
+        type: Object,
+        value: {}
+      },
 
       _itemselection: {
-          type: Number,
-          observer: '_itemselectionChanged'
-        },
+        type: Number,
+        observer: '_itemselectionChanged'
+      },
 
-      _itemdisplay: String,
-
-      
+      itemdisplay: {
+        type: String,
+        value: ""
+      },
 
     },
 
@@ -102,9 +100,12 @@ Example:
     },
 
     _itemselectionChanged: function(newIndex, oldIndex) {  
-          this._itemdisplay = this.itemlist[newIndex][this.nmbattr];
-          this.nmbSelecteditem = this.itemlist[newIndex];
-          this.$.itemmenu.toggle();
+      if (typeof newIndex === 'number') {
+        this.itemdisplay = this.itemlist[newIndex][this.nmbattr];
+        console.log("itemdisplay = " + this.itemdisplay);
+        this.nmbSelecteditem = this.itemlist[newIndex];
+        this.$.itemmenu.toggle();
+      }
     }
 
   });

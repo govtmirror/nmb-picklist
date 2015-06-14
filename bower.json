@@ -1,15 +1,14 @@
 {
   "name": "nmb-picklist",
-  "version": "1.0.0",
+  "version": "0.1.1",
   "authors": [
-    "Anonymous <anonymous@example.com>"
+    "Anonymous <dean@dfwagners.net>"
   ],
-  "description": "An element providing a solution to no problem in particular.",
+  "description": "supplies a picklist for an array of objects.",
   "keywords": [
     "web-component",
     "web-components",
-    "polymer",
-    "seed"
+    "polymer"
   ],
   "main": "nmb-picklist.html",
   "license": "",
