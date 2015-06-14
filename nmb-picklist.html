@@ -69,12 +69,12 @@ Example:
       },
 
       /**  
-      *  Simply the name of the icon used in the button
+      *  Simply the name of the icon used in the button, you must have imported an icon-set.
       */
       nmbicon: String,
 
       /**  
-      *  Key of the property used in the menu
+      *  Key of the property used in the menu.  Must be a String.
       */
       nmbattr: String,
 
@@ -105,34 +105,6 @@ Example:
           this._itemdisplay = this.itemlist[newIndex][this.nmbattr];
           this.nmbSelecteditem = this.itemlist[newIndex];
           this.$.itemmenu.toggle();
-    },
-
-    /**
-     * The `nmb-picklist-lasers` event is fired whenever `fireLasers` is called.
-     *
-     * @event nmb-picklist-lasers
-     * @detail {{sound: String}}
-     */
-
-    /**
-     * Sometimes it's just nice to say hi.
-     *
-     * @param {string} greeting A positive greeting.
-     * @return {string} The full greeting.
-     */
-    sayHello: function(greeting) {
-      var response = greeting || 'Hello World!';
-      return 'nmb-picklist says, ' + response;
-    },
-
-    /**
-     * Attempts to destroy this element's enemies with an any beam of light!
-     *
-     * Or, at least, dispatches an event in the vain hope that someone else will
-     * do the zapping.
-     */
-    fireLasers: function() {
-      this.fire('nmb-picklist-lasers', {sound: 'Pew pew!'});
     }
 
   });
