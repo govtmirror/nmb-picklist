@@ -38,7 +38,8 @@ Example:
     <label>Carrier:</label>
     <paper-icon-button icon="{{nmbicon}}" on-tap="_togglemenu"></paper-icon-button><span>{{_itemdisplay}}</span>
     <iron-collapse id="itemmenu">
-      <iron-selector selected="{{_itemselection}}">
+      <iron-selector 
+          selected="{{_itemselection}}">
         <template is="dom-repeat" items="{{itemlist}}">
           <div>{{item.name}}</div>
         </template>
@@ -72,6 +73,11 @@ Example:
       */
       nmbicon: String,
 
+      /**  
+      *  Key of the property used in the menu
+      */
+      nmbattr: String,
+
       /**
       *  The readonly attribute which is the object selected
       */
@@ -88,33 +94,6 @@ Example:
 
     },
 
-    // Element Lifecycle
-
-    ready: function() {
-      // `ready` is called after all elements have been configured, but
-      // propagates bottom-up. This element's children are ready, but parents
-      // are not.
-      //
-      // This is the point where you should make modifications to the DOM (when
-      // necessary), or kick off any processes the element wants to perform.
-    },
-
-    attached: function() {
-      // `attached` fires once the element and its parents have been inserted
-      // into a document.
-      //
-      // This is a good place to perform any work related to your element's
-      // visual state or active behavior (measuring sizes, beginning animations,
-      // loading resources, etc).
-    },
-
-    detached: function() {
-      // The analog to `attached`, `detached` fires when the element has been
-      // removed from a document.
-      //
-      // Use this to clean up anything you did in `attached`.
-    },
-
     // Element Behavior
 
 
@@ -122,13 +101,11 @@ Example:
       this.$.itemmenu.toggle();
     },
 
-    _itemselectionChanged: function(newIndex, oldIndex) {
-        if (typeof newIndex === 'number') {
-          console.log("in _subjectselectionChged 2");
-          this._itemdisplay = this.itemlist[newIndex].name;
+    _itemselectionChanged: function(newIndex, oldIndex) {  
+          this._itemdisplay = this.itemlist[newIndex][this.nmbattr];
+          this.nmbSelecteditem = this.itemlist[newIndex];
           this.$.itemmenu.toggle();
-        }
-      },
+    },
 
     /**
      * The `nmb-picklist-lasers` event is fired whenever `fireLasers` is called.
