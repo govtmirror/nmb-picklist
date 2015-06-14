@@ -1,0 +1,41 @@
+<!doctype html>
+<!--
+@license
+Copyright (c) 2015 Dean Wagner. All rights reserved.
+-->
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>nmb-picklist Demo</title>
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="../nmb-picklist.html">
+    <!-- <link rel="import" href="../bower_components/iron-icons/iron-icons.html"> -->
+  </head>
+  <body onload="myload()">
+
+    <p>An example of <code>&lt;nmb-picklist&gt;</code>:</p>
+
+    <nmb-picklist nmbicon="menu" itemlist='[
+              {"name":"Joe"},
+              {"name":"Alice"},
+              {"name":"Bob"},
+              {"name":"Eve"}
+              ]'>
+      
+    </nmb-picklist>
+
+    <script>
+      var myload = function () {
+
+        // document.querySelector('nmb-picklist').setAttribute("itemlist",'[
+        //       {"name":"Joe"},
+        //       {"name":"Alice"},
+        //       {"name":"Bob"},
+        //       {"name":"Eve"}
+        //       ]');
+      }
+    </script>
+
+  </body>
+</html>

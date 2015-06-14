@@ -1,0 +1,163 @@
+<!--
+@license
+Copyright (c) 2015 Dean Wagner. All rights reserved.
+-->
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../iron-collapse/iron-collapse.html">
+<link rel="import" href="../iron-selector/iron-selector.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
+
+
+<!--
+An element providing a picklist.  An icon button when tapped, will display a list from which a single element cis selected and displayed next to the icon.  The selected element is available from an attribute.
+
+Example:
+
+    <nmb-picklist></nmb-picklist>
+
+@demo
+-->
+<dom-module id="nmb-picklist">
+
+  <style>
+    :host {
+      display: block;
+      box-sizing: border-box;
+    }
+
+    .author img {
+      float: left;
+      margin-right: 5px;
+      max-height: 100px;
+      max-width: 100px;
+    }
+  </style>
+
+  <template>
+    <label>Carrier:</label>
+    <paper-icon-button icon="{{nmbicon}}" on-tap="_togglemenu"></paper-icon-button><span>{{_itemdisplay}}</span>
+    <iron-collapse id="itemmenu">
+      <iron-selector selected="{{_itemselection}}">
+        <template is="dom-repeat" items="{{itemlist}}">
+          <div>{{item.name}}</div>
+        </template>
+      </iron-selector>
+    </iron-collapse>
+
+    
+  </template>
+
+</dom-module>
+
+<script>
+
+  Polymer({
+
+    is: 'nmb-picklist',
+
+    properties: {
+
+      /** 
+      * This is the array of objects to be used in the list
+      * 
+      * @type [{name:string, ...},...]
+      */
+      itemlist: {
+        type: Array
+      },
+
+      /**  
+      *  Simply the name of the icon used in the button
+      */
+      nmbicon: String,
+
+      /**
+      *  The readonly attribute which is the object selected
+      */
+      nmbSelecteditem: Object,
+
+      _itemselection: {
+          type: Number,
+          observer: '_itemselectionChanged'
+        },
+
+      _itemdisplay: String,
+
+      
+
+    },
+
+    // Element Lifecycle
+
+    ready: function() {
+      // `ready` is called after all elements have been configured, but
+      // propagates bottom-up. This element's children are ready, but parents
+      // are not.
+      //
+      // This is the point where you should make modifications to the DOM (when
+      // necessary), or kick off any processes the element wants to perform.
+    },
+
+    attached: function() {
+      // `attached` fires once the element and its parents have been inserted
+      // into a document.
+      //
+      // This is a good place to perform any work related to your element's
+      // visual state or active behavior (measuring sizes, beginning animations,
+      // loading resources, etc).
+    },
+
+    detached: function() {
+      // The analog to `attached`, `detached` fires when the element has been
+      // removed from a document.
+      //
+      // Use this to clean up anything you did in `attached`.
+    },
+
+    // Element Behavior
+
+
+    _togglemenu: function() {
+      this.$.itemmenu.toggle();
+    },
+
+    _itemselectionChanged: function(newIndex, oldIndex) {
+        if (typeof newIndex === 'number') {
+          console.log("in _subjectselectionChged 2");
+          this._itemdisplay = this.itemlist[newIndex].name;
+          this.$.itemmenu.toggle();
+        }
+      },
+
+    /**
+     * The `nmb-picklist-lasers` event is fired whenever `fireLasers` is called.
+     *
+     * @event nmb-picklist-lasers
+     * @detail {{sound: String}}
+     */
+
+    /**
+     * Sometimes it's just nice to say hi.
+     *
+     * @param {string} greeting A positive greeting.
+     * @return {string} The full greeting.
+     */
+    sayHello: function(greeting) {
+      var response = greeting || 'Hello World!';
+      return 'nmb-picklist says, ' + response;
+    },
+
+    /**
+     * Attempts to destroy this element's enemies with an any beam of light!
+     *
+     * Or, at least, dispatches an event in the vain hope that someone else will
+     * do the zapping.
+     */
+    fireLasers: function() {
+      this.fire('nmb-picklist-lasers', {sound: 'Pew pew!'});
+    }
+
+  });
+
+</script>
